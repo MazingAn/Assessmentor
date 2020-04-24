@@ -8,7 +8,9 @@
     Background="{DynamicResource MaterialDesignPaper}"
     TextElement.FontWeight="Light"
     TextElement.FontSize="14"
+    TextElement.FontFamily="微软雅黑"
     xmlns:local="clr-namespace:Assessmentor"
+    xmlns:template="clr-namespace:Assessmentor.Templates"
     mc:Ignorable="d"
     WindowStyle="None" ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
@@ -131,6 +133,12 @@
             <!--#endregion-->
             <!--#endregion-->
 
+            <!--#region 第二行， 主页面-->
+            <StackPanel Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20 0">
+                <Frame x:Name="MainPageView" Source="Pages/SystemManagement.xaml" NavigationUIVisibility="Hidden" />
+            </StackPanel>
+            <!--#endregion-->
+            
         </Grid>
         <!--#endregion-->
 
@@ -157,7 +165,7 @@
             
             <StackPanel>
                 <!--#region Logo-->
-                <Image Height="140" Source="Assets/air-forceLogo.png" Stretch="Fill"/>
+                <Image Height="140" Source="../Assets/air-forceLogo.png" Stretch="Fill"/>
                 <!--#endregion-->
                 <!--#region 菜单-->
                 <ListBox Foreground="#FF313131" x:Name="ListBoxMainMenu" >

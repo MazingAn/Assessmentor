@@ -63,7 +63,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
+    <Compile Include="Controller\AssessmentController.cs" />
+    <Compile Include="Converters\AssessmentMethodConverter.cs" />
+    <Compile Include="Converters\AssessmentResultConverter.cs" />
+    <Compile Include="Converters\AssessmentStatusConverter.cs" />
+    <Compile Include="Converters\BooleanIconConverter.cs" />
+    <Compile Include="Converters\DateConverter.cs" />
+    <Compile Include="Converters\ConstInfoConvertHelper.cs" />
+    <Compile Include="Converters\DepartmentLevelConverter.cs" />
+    <Compile Include="Model\Assessment.cs" />
+    <Compile Include="Templates\AnimatedPage.cs" />
+    <Compile Include="Templates\Animations\Animator.cs" />
+    <Compile Include="Templates\Animations\PageAnimation.cs" />
+    <Compile Include="View\Pages\AssessmentPlan.xaml.cs">
+      <DependentUpon>AssessmentPlan.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\DocumentManagement.xaml.cs">
+      <DependentUpon>DocumentManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\Exam.xaml.cs">
+      <DependentUpon>Exam.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\SystemManagement.xaml.cs">
+      <DependentUpon>SystemManagement.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -72,10 +96,26 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Config\MainMenuConfiguration.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\Pages\AssessmentPlan.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\DocumentManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\Exam.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\SystemManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -107,6 +147,7 @@
   <ItemGroup>
     <Resource Include="Assets\air-forceLogo.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.3.1.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.3.1.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

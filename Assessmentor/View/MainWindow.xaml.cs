@@ -1,5 +1,9 @@
 ﻿using Assessmentor.Config;
+using Assessmentor.Templates;
+using System;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Assessmentor
 {
@@ -19,7 +23,16 @@ namespace Assessmentor
         /// </summary>
         private void MainMenu_Bind()
         {
-            ListBoxMainMenu.ItemsSource = MainMenuConfiguration.MAIN_MENU_ITEMS;
+            ListBoxMainMenu.ItemsSource = MainMenuConfiguration.MainMenuItems;
+            ListBoxMainMenu.SelectedIndex = MainMenuConfiguration.DefaultSelectedMenuIndex;
+            ListBoxMainMenu.SelectionChanged += ListBoxMainMenuSelectionChanged;
+        }
+
+        private void ListBoxMainMenuSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            var menuListBox = sender as ListBox;
+            var selectedItem = menuListBox.SelectedItem as MainMenuItem;
+            MainPageView.Source = new Uri(selectedItem.PagePath, UriKind.Relative);
         }
 
         /// <summary>
@@ -51,5 +64,16 @@ namespace Assessmentor
         {
             Application.Current.Shutdown();
         }
+
+        /// <summary>
+        /// 鼠标拖拽移动窗体
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            base.OnMouseLeftButtonDown(e);
+            this.DragMove();
+        }
+
     }
 }

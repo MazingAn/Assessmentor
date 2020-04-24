@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,17 +14,18 @@ namespace Assessmentor.Config
     /// </summary>
     class MainMenuConfiguration
     {
-        public static List<MainMenuItem> MAIN_MENU_ITEMS = new List<MainMenuItem>(){
-            new MainMenuItem("系统管理", "Home", "PageMain"),
-            new MainMenuItem("评估计划", "DateRange", "PageAssessment"),
-            new MainMenuItem("理论考核", "LanguageXaml", "PageExam"),
-            new MainMenuItem("单位配置", "Building", "PageDepartmentConfig"),
-            new MainMenuItem("档案管理", "Dictionary", "PageDocumentManager"),
-            new MainMenuItem("资料下载", "Download", "PageDownload"),
-            new MainMenuItem("文件查询", "File", "PageDepartmentConfig"),
-            new MainMenuItem("学习提高", "Video", "PageLearn"),
-            new MainMenuItem("系统帮助", "Help", "PageHelp")
+        public static List<MainMenuItem> MainMenuItems = new List<MainMenuItem>(){
+            new MainMenuItem("系统管理", "Home", "Pages/SystemManagement.xaml"),
+            new MainMenuItem("评估计划", "DateRange", "Pages/AssessmentPlan.xaml"),
+            new MainMenuItem("理论考核", "LanguageXaml", "Pages/Exam.xaml"),
+            new MainMenuItem("单位配置", "Building", "Pages/DepartmentConfig.xaml"),
+            new MainMenuItem("档案管理", "Dictionary", "Pages/DocumentManagement.xaml"),
+            new MainMenuItem("资料下载", "Download", "Pages/DocumentDownload.xaml"),
+            new MainMenuItem("文件查询", "File", "Pages/DepartmentConfiguration.xaml"),
+            new MainMenuItem("学习提高", "Video", "Pages/Learning.xaml"),
+            new MainMenuItem("系统帮助", "Help", "Pages/Help.xaml")
         };
+        public static int DefaultSelectedMenuIndex = 0;
     }
 
     /// <summary>
@@ -43,7 +45,6 @@ namespace Assessmentor.Config
             Kind = kind;
             PagePath = pagePath;
         }
-
 
         /// <summary>
         /// 菜单显示的文字

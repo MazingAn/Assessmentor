@@ -1,0 +1,179 @@
+﻿<template:AnimatedPage x:Class="Assessmentor.View.Pages.AssessmentPlan"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Assessmentor.View.Pages"
+      xmlns:cnv="clr-namespace:Assessmentor.Converters"
+      xmlns:template="clr-namespace:Assessmentor.Templates"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      TextElement.FontFamily="微软雅黑"
+      TextElement.FontSize="12"
+      TextElement.Foreground="#999"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AssessmentPlan">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <cnv:AssessmentStatusConverter x:Key="StatusConverter"/>
+            <cnv:AssessmentResultConverter x:Key="ResultConverter"/>
+            <cnv:AssessmentMethodConverter x:Key="MethodConverter"/>
+            <cnv:DepartmentLevelConverter x:Key="DepartmentLevelConverter"/>
+            <cnv:BooleanIconConverter x:Key="BooleanConverter"/>
+            <cnv:DateConverter x:Key="DateConverter"/>
+        </ResourceDictionary>
+    </Page.Resources>
+    
+    <StackPanel>
+        
+        <!--#region 表格筛选-->
+        <StackPanel>
+            <StackPanel Height="80">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="从" VerticalAlignment="Center" Margin="5"/>
+                    <DatePicker Width="85" VerticalAlignment="Center" Language="Zh-hans" Margin="5" />
+                    <TextBlock Text="开始" VerticalAlignment="Center"/>
+                    <TextBlock Text="至" VerticalAlignment="Center" Margin="5"/>
+                    <DatePicker Width="85" VerticalAlignment="Center" Language="Zh-hans" Margin="5" />
+                    <TextBlock Text="结束" VerticalAlignment="Center"/>
+                    <TextBlock Text="筛选内容：" VerticalAlignment="Center" Margin="10"/>
+                    <ListBox Padding="0"  Margin="0" VerticalAlignment="Center" Style="{x:Null}" Background="{x:Null}" BorderBrush="{x:Null}">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel IsItemsHost="True" Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBoxItem >
+                            <materialDesign:Chip Background="#556688">
+                                <TextBlock Text="旅级单位" Foreground="White" FontSize="10" />
+                            </materialDesign:Chip>
+                        </ListBoxItem>
+
+                        <ListBoxItem>
+                            <materialDesign:Chip Background="#556688"  >
+                                <TextBlock Text="旅级单位" Foreground="White" FontSize="10" />
+                            </materialDesign:Chip>
+                        </ListBoxItem>
+
+                        <ListBoxItem>
+                            <materialDesign:Chip Background="#556688"  >
+                                <TextBlock Text="旅级单位" Foreground="White" FontSize="10" />
+                            </materialDesign:Chip>
+                        </ListBoxItem>
+
+                        <ListBoxItem>
+                            <materialDesign:Chip Background="#556688"  >
+                                <TextBlock Text="旅级单位" Foreground="White" FontSize="10" />
+                            </materialDesign:Chip>
+                        </ListBoxItem>
+                    </ListBox>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+        <!--#endregion-->
+        
+        <!--#region 表格头-->
+        <Grid Height="45" Background="#eee">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="评估单位" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Text="隶属单位" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Text="单位级别" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Text="集合点" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Text="评估方式" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Text="编有防化分队" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Text="评估开始时间" Grid.Column="6" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Text="评估状态" Grid.Column="7" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Text="评估结果" Grid.Column="8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+        <!--#endregion-->
+        
+        <!--#region 表格内容-->
+        <ListBox x:Name="AssessmentList" Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Height}"
+                 VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
+                    <Setter Property="Padding" Value="8"/>
+                    <Setter Property="Height" Value="45"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1.5*"/>
+                            <ColumnDefinition Width="1.5*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <!--#region 单位名称-->
+                        <TextBlock Text="{Binding DepartmentName}" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#999"/>
+                        <!--#endregion-->
+                        <!--#region 父级单位-->
+                        <TextBlock Text="{Binding ParentDepartment}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"  Foreground="#999"/>
+                        <!--#endregion-->
+                        <!--region 单位级别-->
+                        <Grid Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" DataContext="{Binding DepartmentLevel, Converter={StaticResource DepartmentLevelConverter}}">
+                            <TextBlock Text="{Binding Word}" Foreground="{Binding Color}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Grid>
+                        <!--endregion-->
+                        <!--#region 集合点-->
+                        <TextBlock Text="{Binding Rendezvous}" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center"  Foreground="#999"/>
+                        <!--#endregion-->
+                        <!--#region 评估方式-->
+                        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" DataContext="{Binding Method, Converter={StaticResource MethodConverter}}" Grid.Column="4">
+                            <materialDesign:Badged Padding="5" Background="{Binding Color}">
+                                <TextBlock Text="{Binding Word}" Grid.Column="4" Foreground="White"/>
+                            </materialDesign:Badged>
+                        </Grid>
+                        <!--#endregion-->
+                        <!--region 是否有专业防化分队-->
+                        <Grid DataContext="{Binding HasAntichemecalUnit, Converter={StaticResource BooleanConverter}}" Grid.Column="5" HorizontalAlignment="Center">
+                            <materialDesign:PackIcon Kind="{Binding Icon}" Foreground="{Binding Color}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Grid>
+                        <!--#endregion-->
+                        <!--#region 开始时间-->
+                        <TextBlock Text="{Binding StartTime, Converter={StaticResource DateConverter} }" Grid.Column="6" VerticalAlignment="Center" HorizontalAlignment="Center"  Foreground="#999" />
+                        <!--#endregion-->
+                        <!--#region 进行状态-->
+                        <Grid Grid.Column="7" DataContext="{Binding Status, Converter={StaticResource StatusConverter}}" HorizontalAlignment="Center">
+                            <materialDesign:Badged  Padding="5" CornerRadius="5" VerticalAlignment="Center" Background="{Binding Color}" >
+                                <StackPanel Orientation="Horizontal" Background="{Binding Color}">
+                                    <materialDesign:PackIcon Kind="{Binding Icon}" Foreground="White" Width="15" Height="15" />
+                                    <TextBlock Text="{Binding Word}" FontSize="11" VerticalAlignment="Center" Foreground="White"/>
+                                </StackPanel>
+                            </materialDesign:Badged>
+                        </Grid>
+                        <!--#endregion-->
+                        <!--#region 评估结果-->
+                        <Grid Grid.Column="8" DataContext="{Binding Result, Converter={StaticResource ResultConverter}}" HorizontalAlignment="Center">
+                            <materialDesign:Badged Background="{Binding Color}" Padding="5" CornerRadius="5" VerticalAlignment="Center">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="{Binding Icon}" Foreground="White" Width="15" Height="15" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Word}" FontSize="11" VerticalAlignment="Center" Foreground="White"/>
+                                </StackPanel>
+                            </materialDesign:Badged>
+                        </Grid>
+                        <!--#endregion-->
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <!--#endregion-->
+    </StackPanel>
+</template:AnimatedPage>
